@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1>Edit Your Profile</h1>
+
+        {% if success_message %}
+        <div class="alert alert-success">
+            {{ success_message }}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input class="form-control" id="username" name="username" placeholder="Username" type="text" required value="{{ user['username'] }}">
+                {% if danger_messages["username"] %}
+                <p class="text-danger">{{ danger_messages["username"] }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required value="{{ user['email'] }}">
+                {% if danger_messages["email"] %}
+                <p class="text-danger">{{ danger_messages["email"] }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input class="form-control" id="position" name="position" placeholder="Position" type="text" required value="{{ user['position'] }}">
+                {% if danger_messages["position"] %}
+                <p class="text-danger">{{ danger_messages["position"] }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input class="form-control" id="department" name="department" placeholder="Department" type="text" required value="{{ user['department'] }}">
+                {% if danger_messages["department"] %}
+                <p class="text-danger">{{ danger_messages["department"] }}</p>
+                {% endif %}
+            </div>
+            <button class="btn btn-primary" type="submit">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

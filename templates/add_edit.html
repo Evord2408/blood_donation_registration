@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View Data
+{% endblock %}
+
+{% block main %}
+
+    <!-- Date display -->
+    <div class="table-responsive">
+        <div class="text-center mt-3" style="color: green;">
+            <h5><b>{{ current_datetime.strftime('%d-%m-%Y') }}</b></h5>
+        </div>
+    </div>
+
+    <!-- Add Donor Button -->
+    <div class="text-center mt-3">
+        <a href="{{ url_for('add_donor') }}" class="btn btn-primary btn-lg">ADD DONOR</a>
+    </div>
+
+    <!-- Donor Data List -->
+    <h2 class="text-center"><b>DONOR DATA LIST</b></h2>
+    <table class="table table-striped table-bordered mt-3">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">ID Number</th>
+                <th scope="col">Blood Group</th>
+                <th scope="col">Total Donation</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors|reverse %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ donor.name }}</td>
+                    <td>{{ donor.idnumber }}</td>
+                    <td>{{ donor.bloodtype }}</td>
+                    <td>{{ donor.donate }}</td>
+                    <td>
+                        <!-- Edit Button -->
+                        <a href="{{ url_for('edit_donor', donor_id=donor.id) }}" class="btn btn-success">Edit</a>
+                        <!-- Delete Button -->
+                        <button onclick="confirmDeletion({{ donor.id }})" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- JavaScript for Delete Confirmation -->
+    <script>
+        function confirmDeletion(donorId) {
+            if (confirm("Confirm deletion?")) {
+                // Send an AJAX request to delete the donor
+                fetch(`/delete_donor/${donorId}`, {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Reload the page to update the donor list
+                        window.location.reload();
+                    } else {
+                        alert(data.message);  // Show an alert if deletion fails
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+    </script>
+
+{% endblock %}

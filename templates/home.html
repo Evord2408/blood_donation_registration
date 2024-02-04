@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="text-center mt-3" style="color: green;">
+    <h5><b>{{ current_datetime.strftime('%d-%m-%Y') }}</b></h5>
+</div>
+<div class="container">
+
+    <!-- Flash Message Container -->
+    <div class="flash-container">
+        {% if danger_message %}
+            <!-- Danger Flash Message -->
+            <div class="alert alert-danger">
+                {{ danger_message }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Flash Message Div -->
+    <div id="flashMessage" class="flash-message"></div>
+
+    <!-- Flash Message Div with a different ID -->
+    <div id="flashMessage2" class="text-danger"></div> <!-- Change ID to flashMessage2 -->
+
+    <!-- Enhanced Search Donor Form -->
+    <form action="{{ url_for('search_donor') }}" method="get">
+        <div>
+            <input type="text" class="search-input" name="search_term" placeholder="Name or ID Number">
+            <button type="submit" class="search-button">Search</button>
+        </div>
+    </form>
+
+    <!-- JavaScript for Enhanced Search -->
+    <script>
+        const searchForm = document.querySelector('form');
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const search_term = document.querySelector('input[name="search_term"]').value;
+            if (!search_term) {
+                displayFlashMessage("Please enter Donor name or ID number", "danger");
+            } else {
+                window.location.href = `{{ url_for('search_donor') }}?search_term=${search_term}`;
+            }
+        });
+
+        // Function to display flash messages
+        function displayFlashMessage(message, message_type) {
+            const flashMessageDiv = document.getElementById('flashMessage');
+            flashMessageDiv.textContent = message;
+            flashMessageDiv.className = `flash-message alert alert-${message_type}`;
+        }
+    </script>
+
+    <div class="text-center mt-3" ><h2><b>Today's Blood Collection</b></h2></div>
+
+    <!-- Blood Collection Table with Strong and Bold Border -->
+    <table class="table table-bordered table-dark mt-4">
+        <thead>
+            <tr>
+                <th>Donor Group</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows for Blood Groups and Total Collection -->
+            <tr>
+                <td>A</td>
+                <td>{{ blood_collection.get('A', 0) }}</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>{{ blood_collection.get('B', 0) }}</td>
+            </tr>
+            <tr>
+                <td>AB</td>
+                <td>{{ blood_collection.get('AB', 0) }}</td>
+            </tr>
+            <tr>
+                <td>O</td>
+                <td>{{ blood_collection.get('O', 0) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Total Collection Display -->
+    <div class="mt-4">
+        <strong>Total Collection: <span style="color: red;">{{ total_collection }}</span></strong>
+    </div>
+</div>
+{% endblock %}

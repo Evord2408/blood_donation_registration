@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="form-container">
+        <h2>Staff Registration</h2>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <input class="form-control" id="username" name="username" placeholder="Username" type="text" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="password" name="password" placeholder="Password" type="password" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" type="password" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="position" name="position" placeholder="Position" type="text" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="department" name="department" placeholder="Department" type="text" required>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">Register</button>
+            <br>
+            {% if danger_message %}
+            <div class="alert alert-danger">
+                {{ danger_message }}
+            </div>
+            {% endif %}
+        </form>
+        {% if message %}
+            <div class="alert alert-danger mt-3" role="alert">{{ message }}</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

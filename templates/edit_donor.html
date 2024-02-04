@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Donor
+{% endblock %}
+
+{% block main %}
+<div class="col-md-6 offset-md-3">
+    <h2>Edit Donor Information</h2>
+
+    {% if danger_message %}
+        <!-- Display Danger Message if Exists -->
+        <div class="alert alert-danger">
+            {{ danger_message }}
+        </div>
+    {% endif %}
+
+    <form action="{{ url_for('edit_donor', donor_id=donor.id) }}" method="post">
+        <!-- ID Number Input -->
+        <div class="form-group">
+            <label for="idnumber">ID Number:</label>
+            <input type="text" class="form-control" id="idnumber" name="idnumber" value="{{ donor.idnumber }}" required>
+        </div>
+
+        <!-- Name Input -->
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ donor.name }}" required>
+        </div>
+
+        <!-- Contact Input -->
+        <div class="form-group">
+            <label for="contact">Contact:</label>
+            <input type="text" class="form-control" id="contact" name="contact" value="{{ donor.contact }}">
+        </div>
+
+        <!-- Blood Type Dropdown -->
+        <div class="form-group">
+            <label for="bloodtype">Blood Group:</label>
+            <select class="form-control" id="bloodtype" name="bloodtype" required>
+                <option value="A" {% if donor.bloodtype == 'A' %}selected{% endif %}>A</option>
+                <option value="B" {% if donor.bloodtype == 'B' %}selected{% endif %}>B</option>
+                <option value="AB" {% if donor.bloodtype == 'AB' %}selected{% endif %}>AB</option>
+                <option value="O" {% if donor.bloodtype == 'O' %}selected{% endif %}>O</option>
+            </select>
+        </div>
+
+        <!-- Number of Blood Donations Input -->
+        <div class="form-group">
+            <label for="donate">Number of Blood Donations:</label>
+            <input type="number" class="form-control" id="donate" name="donate" value="{{ donor.donate }}" required>
+        </div>
+
+        <!-- Save Changes Button -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

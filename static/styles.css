@@ -1,0 +1,158 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+/* Generic Form Container */
+.form-container {
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles */
+h2 {
+    margin: 0;
+}
+
+/* Generic Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+}
+
+/* Button Styles */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Search Input and Button Styles */
+.search-container {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+table th, table td {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+/* Center the table */
+.table {
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+/* ADD DONOR button */
+.btn-primary.btn-lg {
+    display: inline-block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+}
+
+/* Flash Message Styles */
+.flash-container {
+    padding: 10px;
+}
+
+.flash-messages {
+    list-style: none;
+    padding: 0;
+}
+
+.flash-message {
+    margin-bottom: 10px;
+}
+
+/* Flash Message Colors */
+.flash-message.success {
+    color: green;
+}
+
+.flash-message.danger, .flash-message.error {
+    color: red;
+}
+
+/* Custom Form Control */
+.form-control-custom {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+/* Custom Logo Styles */
+.logo img {
+    max-width: 60px;
+}

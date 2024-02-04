@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Add Donor{% endblock %}
+
+{% block main %}
+    <!-- Date display -->
+    <div class="text-center mt-3" style="color: green;">
+        <h5><b>{{ current_datetime.strftime('%d-%m-%Y') }}</b></h5>
+    </div>
+
+    <div class="container">
+        <!-- Form header -->
+        <h3 class="mb-4"><b>ADD DONOR</b></h3>
+
+        <!-- Donation Form -->
+        <form action="{{ url_for('add_donor') }}" method="post">
+
+            <!-- ID Number -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <label for="idnumber" class="form-label">ID Number:</label>
+                    <input type="text" id="idnumber" name="idnumber" class="form-control form-control-custom" required>
+                </div>
+            </div>
+
+            <!-- Name -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control form-control-custom" required>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <label for="contact" class="form-label">Contact:</label>
+                    <input type="text" id="contact" name="contact" class="form-control form-control-custom">
+                </div>
+            </div>
+
+            <!-- Blood Type -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <label for="bloodtype" class="form-label">Blood Type:</label>
+                    <select id="bloodtype" name="bloodtype" class="form-select" required>
+                        <option value="" disabled selected>Select Blood Type</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="O">O</option>
+                        <option value="AB">AB</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Donation Input -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <label for="donate" class="form-label">Donate:</label>
+                    <div class="input-group">
+                        <button type="button" class="btn btn-secondary" onclick="decrementDonations()">-</button>
+                        <input type="text" id="donate" name="donate" value="0" class="form-control text-center" style="margin-bottom: 0px;" readonly>
+                        <button type="button" class="btn btn-secondary" onclick="incrementDonations()">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row mb-3">
+                <div class="col-md-15">
+                    <button type="submit" class="btn btn-primary">Add Donor</button>
+                </div>
+            </div>
+
+            <!-- Danger Message -->
+            {% if danger_message %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ danger_message }}
+                </div>
+            {% endif %}
+
+        </form>
+    </div>
+
+    <!-- JavaScript for Donation Input -->
+    <script>
+        let donationsInput = document.getElementById('donate');
+
+        // Increment donations function
+        function incrementDonations() {
+            donationsInput.value = parseInt(donationsInput.value) + 1;
+        }
+
+        // Decrement donations function
+        function decrementDonations() {
+            if (parseInt(donationsInput.value) > 0) {
+                donationsInput.value = parseInt(donationsInput.value) - 1;
+            }
+        }
+    </script>
+{% endblock %}
