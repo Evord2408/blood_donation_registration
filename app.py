@@ -43,13 +43,13 @@ def get_today_date():
 # Home route
 @app.route("/")
 def index():
-    return redirect("/home")
+    return redirect("/index")
 
 # Login route
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if g.user:
-        return redirect("/home")
+        return redirect("/index")
 
     message = None
 
@@ -72,7 +72,7 @@ def login():
                     session["user_id"] = user["id"]
                     session["user"] = user
                     flash(f"Welcome, {user['username']}!", "success")
-                    return redirect("/home")
+                    return redirect("/index")
 
     return render_template("login.html", message=message)
 
@@ -116,9 +116,9 @@ def logout():
     return redirect("/login")
 
 # Home route with search functionality
-@app.route("/home", methods=["GET", "POST"])
+@app.route("/index", methods=["GET", "POST"])
 @login_required
-def home():
+def index():
     search_results = []
 
     if request.method == "POST":
@@ -148,7 +148,7 @@ def home():
         if blood_type not in blood_collection:
             blood_collection[blood_type] = 0
 
-    return render_template("home.html", search_results=search_results, blood_collection=blood_collection, total_collection=total_collection)
+    return render_template("index.html", search_results=search_results, blood_collection=blood_collection, total_collection=total_collection)
 
 # Profile route
 @app.route("/profile", methods=["GET", "POST"])
